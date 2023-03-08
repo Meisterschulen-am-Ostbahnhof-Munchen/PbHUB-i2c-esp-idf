@@ -30,7 +30,7 @@ static const char *TAG = "i2c-simple-example";
 #define I2C_MASTER_RX_BUF_DISABLE   0                          /*!< I2C master doesn't need buffer */
 #define I2C_MASTER_TIMEOUT_MS       1000
 
-#define PBHUB_SENSOR_ADDR                 0x68        /*!< Slave address of the PBHUB sensor */
+#define PBHUB_SENSOR_ADDR                 0x61        /*!< Slave address of the PBHUB sensor */
 #define PBHUB_WHO_AM_I_REG_ADDR           0x75        /*!< Register addresses of the "who am I" register */
 
 #define PBHUB_PWR_MGMT_1_REG_ADDR         0x6B        /*!< Register addresses of the power managment register */
