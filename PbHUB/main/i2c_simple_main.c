@@ -31,7 +31,7 @@ static const char *TAG = "i2c-simple-example";
 #define I2C_MASTER_TIMEOUT_MS       1000
 
 #define PBHUB_SENSOR_ADDR                 0x61        /*!< Slave address of the PBHUB sensor */
-#define PBHUB_WHO_AM_I_REG_ADDR           0x75        /*!< Register addresses of the "who am I" register */
+#define PBHUB_Firmware_REG_ADDR           0xFE        /*!< Register addresses of the "who am I" register */
 
 #define PBHUB_PWR_MGMT_1_REG_ADDR         0x6B        /*!< Register addresses of the power managment register */
 #define PBHUB_RESET_BIT                   7
@@ -81,16 +81,16 @@ static esp_err_t i2c_master_init(void)
 
 void app_main(void)
 {
-    uint8_t data[2];
+    uint8_t data[1];
     ESP_ERROR_CHECK(i2c_master_init());
     ESP_LOGI(TAG, "I2C initialized successfully");
 
     /* Read the PBHUB WHO_AM_I register, on power up the register should have the value 0x71 */
-    ESP_ERROR_CHECK(PBHUB_register_read(PBHUB_WHO_AM_I_REG_ADDR, data, 1));
-    ESP_LOGI(TAG, "WHO_AM_I = %X", data[0]);
-
-    /* Demonstrate writing by reseting the PBHUB */
-    ESP_ERROR_CHECK(PBHUB_register_write_byte(PBHUB_PWR_MGMT_1_REG_ADDR, 1 << PBHUB_RESET_BIT));
+    ESP_ERROR_CHECK(PBHUB_register_read(PBHUB_Firmware_REG_ADDR, data, 1));
+    ESP_LOGI(TAG, "PBHUB_Firmware_REG_ADDR = %X", data[0]);
+//
+//    /* Demonstrate writing by reseting the PBHUB */
+//    ESP_ERROR_CHECK(PBHUB_register_write_byte(PBHUB_PWR_MGMT_1_REG_ADDR, 1 << PBHUB_RESET_BIT));
 
     ESP_ERROR_CHECK(i2c_driver_delete(I2C_MASTER_NUM));
     ESP_LOGI(TAG, "I2C de-initialized successfully");
